@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nueva Carga</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        /* Estilos CSS aquí */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #000;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            display: block;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="date"],
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .btn-primary {
+            flex: 1;
+            margin-right: 10px;
+            padding: 12px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-secondary {
+            flex: 1;
+            padding: 12px;
+            background-color: #6c757d;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        /* Estilos para el panel de cargas */
+        #loadPanel {
+            margin-top: 30px;
+        }
+
+        .panel-item {
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .panel-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .panel-item:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* Estilos de la barra lateral */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 250px;
+            background-color: #343a40;
+            padding-top: 50px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar ul li {
+            padding: 10px;
+            color: #fff;
+            transition: background-color 0.3s ease;
+        }
+
+        .sidebar ul li:hover {
+            background-color: #495057;
+        }
+
+        .sidebar ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .sidebar ul li.active {
+            background-color: #007bff;
+        }
+
+        .sidebar ul li.active:hover {
+            background-color: #007bff;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Barra lateral -->
+    <div class="sidebar">
+        <!-- Brand Logo -->
+        <a href="#" class="brand-link">
+            <img src="/static/imagen/logant.png" alt="Logo" style="width: 80%; margin: 0 auto; display: block;">
+            <span class="brand-text font-weight-bold"></span>
+        </a>
+        <ul>
+            <li><a href="/index/"><i class="fas fa-home"></i> Inicio</a></li>
+            <li><a href="/formularios/"><i class="fas fa-file-alt"></i> Formularios</a></li>
+            <li><a href="/cotizacion/"><i class="fas fa-money-bill"></i> Cotización</a></li>
+            <li><a href="/agregar_cliente/"><i class="fas fa-truck"></i> Proveedor</a></li>
+            <li><a href="/cargar_informacion/"><i class="fas fa-upload"></i> Cargar Información</a></li>
+            <li><a href="/consulta/"><i class="fas fa-search"></i> Consulta</a></li>
+            <li><a href="/solicitar_reporte/"><i class="fas fa-file-excel"></i> Solicitar reporte</a></li>
+            <li><a href="/reclamos/"><i class="fas fa-exclamation-triangle"></i> Reclamos</a></li>
+        </ul>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="container">
+        <h1 class="title">Nueva Carga</h1>
+        <form id="trz-form">
+            <div class="form-group">
+                <label for="id">ID:</label>
+                <input type="text" id="id" name="id" readonly class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="fecha">FECHA:</label>
+                <input type="date" id="fecha" name="fecha" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="fecha_cotizacion">Fecha de cotización:</label>
+                <input type="date" id="fecha_cotizacion" name="fecha_cotizacion" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="cliente">Cliente:</label>
+                <input type="text" id="cliente" name="cliente" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="solicitante">Solicitante:</label>
+                <input type="text" id="solicitante" name="solicitante" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="num_cotizacion">N° de cotización:</label>
+                <input type="text" id="num_cotizacion" name="num_cotizacion" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="recurso">Recurso:</label>
+                <select id="recurso" name="recurso" class="form-control">
+                    <option value="Seleccionar">Seleccionar</option>
+                    <!-- Agregar opciones de recurso aquí -->
+                </select>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary" onclick="saveData()">GUARDAR ⮕</button>
+                <button type="button" class="btn btn-secondary" id="continueButton">CONTINUAR Ø</button>
+            </div>
+        </form>
+
+        <!-- Panel de cargas -->
+        <div id="loadPanel">
+            <h2>Cargas Realizadas</h2>
+            <div id="loadItems"></div>
+        </div>
+    </div>
+
+    <!-- jQuery, Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Objeto para almacenar los datos de cada carga
+        var cargas = JSON.parse(localStorage.getItem('cargas')) || {};
+        // Contador para generar IDs únicos
+        var idCounter = localStorage.getItem('idCounter') || 1;
+        // Función para obtener el próximo ID
+        function getNextId() {
+            return idCounter++;
+        }
+        // Función para guardar los datos de las cargas en localStorage
+        function saveData() {
+            var generatedId = getNextId();
+            var formData = {
+                id: generatedId,
+                fecha: document.getElementById('fecha').value,
+                fecha_cotizacion: document.getElementById('fecha_cotizacion').value,
+                cliente: document.getElementById('cliente').value,
+                solicitante: document.getElementById('solicitante').value,
+                num_cotizacion: document.getElementById('num_cotizacion').value,
+                recurso: document.getElementById('recurso').value
+            };
+            // Guardar los datos de la carga en el objeto cargas
+            cargas[generatedId] = formData;
+            // Guardar el contador actualizado en localStorage
+            localStorage.setItem('idCounter', idCounter);
+            // Guardar el objeto cargas en localStorage
+            localStorage.setItem('cargas', JSON.stringify(cargas));
+            // Llenar el campo ID con el ID generado
+            document.getElementById('id').value = generatedId;
+            // Habilitar el botón "CONTINUAR"
+            document.getElementById('continueButton').disabled = false;
+            // Mostrar mensaje de éxito
+            alert("Datos guardados con éxito. ID generado: " + generatedId);
+        }
+        // Función para manejar el clic en el botón "CONTINUAR"
+        document.getElementById('continueButton').addEventListener('click', function() {
+            // Obtener el ID de la carga seleccionada
+            var selectedId = document.getElementById('id').value;
+            // Redireccionar al formulario de remito con los parámetros de la carga seleccionada
+            var formData = cargas[selectedId];
+            var queryString = Object.keys(formData).map(key => key + '=' + encodeURIComponent(formData[key])).join('&');
+            window.location.href = '/remito/?' + queryString;
+        });
+        // Función para cargar los datos de un ID en el formulario
+        function loadFormData(id) {
+            // Obtener los datos de la carga asociados a ese ID del objeto cargas
+            var formData = cargas[id];
+            // Llenar el formulario con los datos de la carga
+            document.getElementById('id').value = formData.id;
+            document.getElementById('fecha').value = formData.fecha;
+            document.getElementById('fecha_cotizacion').value = formData.fecha_cotizacion;
+            document.getElementById('cliente').value = formData.cliente;
+            document.getElementById('solicitante').value = formData.solicitante;
+            document.getElementById('num_cotizacion').value = formData.num_cotizacion;
+            document.getElementById('recurso').value = formData.recurso;
+        }
+        // Cargar las cargas almacenadas en localStorage al cargar la página
+        window.onload = function() {
+            for (var id in cargas) {
+                var loadItem = document.createElement('div');
+                loadItem.classList.add('panel-item');
+                loadItem.dataset.id = id;
+                loadItem.innerHTML = `
+                    <div>ID: ${cargas[id].id}</div>
+                    <div>Fecha: ${cargas[id].fecha}</div>
+                    <div>Fecha de cotización: ${cargas[id].fecha_cotizacion}</div>
+                    <div>Cliente: ${cargas[id].cliente}</div>
+                    <div>Solicitante: ${cargas[id].solicitante}</div>
+                    <div>N° de cotización: ${cargas[id].num_cotizacion}</div>
+                    <div>Recurso: ${cargas[id].recurso}</div>`;
+                loadItem.onclick = function() {
+                    var id = this.dataset.id;
+                    loadFormData(id);
+                };
+                document.getElementById('loadItems').appendChild(loadItem);
+            }
+            // Función para redirigir al formulario de remito con los datos de carga
+    function redirectToRemito() {
+        // Obtener los valores de los campos del formulario
+        var id = document.getElementById('id').value;
+        var fecha = document.getElementById('fecha').value;
+        var fecha_cotizacion = document.getElementById('fecha_cotizacion').value;
+        var cliente = document.getElementById('cliente').value;
+        var solicitante = document.getElementById('solicitante').value;
+        var num_cotizacion = document.getElementById('num_cotizacion').value;
+        var recurso = document.getElementById('recurso').value;
+
+        // Construir la URL con los parámetros de consulta
+        var queryString = '?id=' + encodeURIComponent(id) +
+            '&fecha=' + encodeURIComponent(fecha) +
+            '&fecha_cotizacion=' + encodeURIComponent(fecha_cotizacion) +
+            '&cliente=' + encodeURIComponent(cliente) +
+            '&solicitante=' + encodeURIComponent(solicitante) +
+            '&num_cotizacion=' + encodeURIComponent(num_cotizacion) +
+            '&recurso=' + encodeURIComponent(recurso);
+
+        // Redirigir al formulario de remito con los parámetros de consulta
+        window.location.href = '/remito/' + queryString;
+    }
+        };
+    </script>
+</body>
+
+</html>
